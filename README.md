@@ -88,11 +88,13 @@ These logs provide full transparency into the human-AI collaborative development
 
 This code is provided for research and educational purposes. Please cite the relevant publications if you use this work.
 
+## Repository
+
+https://github.com/jinleiphys/AI_emulator
+
 ## Contact
 
 Jin Lei
-Department of Physics
-Ohio University
 
 ## Acknowledgments
 
