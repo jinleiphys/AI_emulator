@@ -1,0 +1,17 @@
+NAMELIST
+! Emulator prediction test
+
+&EMULATOR_PREDICT
+  emulator_file = 'emulator_test.dat'
+  base_input = '../test/test_d58Ni_cdcc.in'
+  predict_method = 'matrix'
+  output_format = 'cross_section'
+/
+
+! Test at nominal parameters (should have very low error)
+&PARAM_SET  t_1_uv=53.3, t_1_wd=7.8 /
+! Test at 10% deviation
+&PARAM_SET  t_1_uv=50.0, t_1_wd=8.5 /
+! Test at 20% deviation
+&PARAM_SET  t_1_uv=48.0, t_1_wd=10.0 /
+&PARAM_SET /

@@ -1,0 +1,436 @@
+ba9bc78dbfb8772a1a73073ec0805c45092f1046
+2025-12-23 09:42:01 +0800
+Rename cookie/pmm to cookie/emulator for clarity
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+
+---
+1059e37e738f65e3c36f5bc61a5b9e8a5f426f81
+2025-12-19 17:12:12 +0800
+Update PRC figures with panel labels (a)-(e) and legend placement
+- Add (a)/(b)/(c)/(d)/(e) labels before Test 1-5 for PRC format
+- Move legend to bottom-right empty subplot area for both sigma and S-matrix error figures
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+
+---
+1305caa5b1fddab0ce5c57ed1057854b0bf4b20f
+2025-12-19 16:42:01 +0800
+Update PRC paper plotting script for color-online figures
+- Remove non-existent RBF method references
+- Add line styles (solid, dashed, dotted) for black-and-white compatibility
+- Add markers for data series differentiation
+- Use hatching patterns for bar charts
+- Fix legend positions for all figures
+- Clean up old unused figure files
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+
+---
+0495ff316449975f6a8ad96a2ac7b55f99246298
+2025-12-19 15:27:38 +0800
+Change timing from CPU time to wall time for accurate speedup measurement
+- Replace cpu_time() with system_clock() for wall time measurement
+- Remove OpenMP from W matrix construction to avoid BLAS memory issues
+- Wall time gives accurate speedup measurement for multi-threaded BLAS
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+
+---
+34ac90c099a87b789ab45adf9af2efc927533c4f
+2025-12-19 15:03:41 +0800
+Further optimize W matrix construction with per-radial-point ZGEMM
+- Replace triple loop with ZGEMM at each radial point
+- Proper OpenMP parallelization with thread-private arrays
+- Speedup improved from ~500x to ~1000x
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+
+---
+a06615f29623794ba0687bc9a787de0012374eb6
+2025-12-19 14:58:07 +0800
+Optimize emulator_predict_J with ZGEMM/ZGEMV for 10x speedup
+- Replace multiple ZGERU rank-1 updates with single ZGEMM for V_red
+- Use ZGEMV for b_red and c_full computation
+- Add OpenMP parallelization for W matrix construction
+- Speedup improved from ~65x to ~500x
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+
+---
+3f5458d0cb8b9f0e3d8ea20d63d90d93e1627d3d
+2025-12-19 14:48:44 +0800
+Remove RBF method, add BLAS optimization for matrix reconstruction
+- Remove RBF interpolation code from emulator_predict.F90 (inaccurate for high-dim params)
+- Add BLAS ZGERU rank-1 update optimization to emulator_predict_J
+- Update plotting scripts and figures for PRC paper
+- Add various test input files and analysis scripts
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+
+---
+ce941361e8741d7cd5a1b13bb037f8d7a52429ed
+2025-12-19 10:12:48 +0800
+Disable fort.499 debug output to reduce disk usage
+Commented out write(499,...) statements in:
+- tho.f: pseudo wavefunction output
+- ucouple_v2.f: coupling potential output
+
+These debug outputs generated ~1.7GB files during CDCC calculations.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+611ca8a90682a4841cf6e3b3348e287f676ac107
+2025-12-18 17:31:04 +0800
+Add PRC paper figures and plotting script
+Generated publication-quality figures for CDCC emulator paper:
+- fig_error_comparison: Elastic cross section errors (5 test cases)
+- fig_speedup_comparison: RBF (~60,000x) vs Galerkin (~48x) speedup
+- fig_Smatrix_all_tests: S-matrix errors vs J for all 5 tests
+- fig_sigma_all_tests: Cross section errors vs J for all 5 tests
+- fig_sigma_vs_J: Partial wave cross section comparison
+- fig_wavefunction: Wavefunction coefficient comparison
+- fig_accuracy_speedup: Accuracy-speedup tradeoff summary
+- fig_angular_all: Angular distributions (optional)
+
+Figures formatted for PRC double-column layout with appropriate font sizes.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+0f9d9be4bab4a23afd7d3e3d773bb82ce04954a7
+2025-12-18 16:29:02 +0800
+Rename GP to RBF: correct terminology for interpolation method
+The code uses Nadaraya-Watson kernel regression (RBF interpolation),
+not Gaussian Process regression. Key changes:
+
+- Rename emulator_predict_gp* functions to emulator_predict_rbf*
+- Update all variable names: S_gp->S_rbf, error_gp->error_rbf, etc.
+- Update predict_method option: 'gp' -> 'rbf'
+- Update documentation and input files
+- Keep function behavior identical, only naming changed
+
+The method uses weighted average with Gaussian RBF kernel:
+  w_i = exp(-d²/2σ²), α = Σ w_i·α_i / Σ w_i
+
+This is deterministic interpolation, not probabilistic GP inference.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+560aece72b2b2347daa7b398e4b5689e58c5a2cb
+2025-12-18 15:40:18 +0800
+Remove duplicate 'Number of parameter sets' output
+Already printed in print_predict_config()
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+02c0536cac1dd5ec036449d33cd856822d2d10cb
+2025-12-18 15:24:32 +0800
+Add S-matrix file output for complete benchmark data
+- Output smatrix_predN.dat with S11 vs J (exact, GP, Matrix)
+- Now outputs all three files per prediction:
+  - cross_section_predN.dat
+  - wavefunction_predN.dat
+  - smatrix_predN.dat
+- Change predict_18param.in to output_format='all'
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+a30b56d0e0e2a4cc549b4d6c26adfa3ae1a1a2cf
+2025-12-18 15:14:54 +0800
+Add all 18 optical potential parameters to PARAM_SET namelist
+Support full 18-parameter prediction input:
+- Proton: uv, rv, av, uw, rw, aw, wd, rwd, awd
+- Neutron: uv, rv, av, uw, rw, aw, wd, rwd, awd
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+a3b6f0f72cbccee5f7f43b8d802f517915119e7c
+2025-12-18 13:49:34 +0800
+Fix emulator training to use GPU solver (solver_type from input)
+- Pass solver_type parameter to dbmm_coupled_channel_cc calls
+- Fix train_18param.in namelist: use min_val/max_val instead of min/max
+- Now correctly uses GPU IRS-GMRES solver when solver_type=3
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+12d88f857a4ea79129e81e4740c44bcb1c280dcb
+2025-12-18 13:07:29 +0800
+Remove debug outputs and add PRC_paper test case
+- Remove verbose debug outputs from dbmm.F90 (Fine grid source debug)
+- Remove "Potential cache initialized" message from ucouple_cached.f90
+- Add PRC_paper/ folder with 18-parameter emulator test case:
+  - d58Ni_cdcc.in: jmax=30, nlag=180, solver_type=3 (GPU)
+  - train_18param.in: 200 LHS samples, 18 optical potential parameters
+  - predict_18param.in: 5 test parameter sets
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+581b0b21a713746496e8697ae2f9c8381bc9349a
+2025-12-18 12:44:01 +0800
+Add wavefunction and cross section file output for plotting
+emulator_predict now outputs two data files per prediction:
+1. cross_section_predN.dat: J vs sigma_exact, sigma_gp, sigma_matrix (in mb)
+2. wavefunction_predN.dat: r vs c_exact, c_gp, c_matrix for J=0 elastic channel
+
+File format:
+- Cross section: columns J, sigma_exact(mb), sigma_gp(mb), sigma_matrix(mb)
+- Wavefunction: columns r(fm), Re(c), Im(c) for exact, GP, and matrix methods
+
+Results verified to match cookie's per-J elastic cross sections exactly.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+ef048e4d70c6da78837e38c73483c501a4b0971a
+2025-12-18 12:38:32 +0800
+Add S-matrix and elastic cross section comparison to emulator_predict
+- Add compute_S_from_c subroutine in dbmm_emulator.F90 to compute
+  S-matrix column from wavefunction coefficients
+- Make coulomb_hankel_plus public in dbmm.F90 for S-matrix computation
+- Update emulator_predict.F90 to output:
+  - Per-J S-matrix errors for GP and Matrix Reconstruction
+  - Total elastic cross section comparison
+  - Summary showing wavefunction, S-matrix, and cross section errors
+
+Results show Matrix Reconstruction achieves <0.1% error for all
+observables with ~800x speedup. GP interpolation achieves ~80,000x
+speedup with errors dependent on interpolation quality.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+fb5c229897deceea25fc5a7de8c70dab1ccf8651
+2025-12-18 12:11:52 +0800
+Add per-J GP interpolation and stdin input for emulator programs
+Features:
+- emulator_predict: Support both GP interpolation and Matrix Reconstruction
+  for multi-J emulators with timing comparison
+- emulator_train/predict: Read config directly from stdin (./prog < config.in)
+- Add emulator_predict_gp_J for per-J RBF coefficient interpolation
+- Add alpha_train_J storage for training coefficients
+- Output all J values with detailed timing per method
+- Fix M_fixed_red_J allocation when loading emulator from file
+
+Results show:
+- GP Interpolation: ~0.5% error, 40000-80000x speedup
+- Matrix Reconstruction: ~0.05% error, 800x speedup
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+a6d28cdf7c39ccf3c6bd19dba409572fd88eb018
+2025-12-18 10:48:34 +0800
+Remove unified basis approach (not viable for DBMM)
+Analysis concluded that unified basis across J values is not feasible
+for DBMM without complex scaling:
+
+- Different J values have different channel counts (18-37)
+- Open/closed channels have incompatible boundary conditions
+  (oscillatory vs exponentially decaying)
+- Zero-padding introduces artificial structure, causing ~100% error
+
+Decision: Use per-J emulator (separate basis per J value)
+This approach is already working with good accuracy.
+
+Changes:
+- Remove unified_basis option from emulator_io.F90
+- Remove unified_basis handling from emulator_train.F90
+- Remove test_unified_accuracy.F90 and config files
+- Update UNIFIED_BASIS_EMULATOR.md with analysis conclusions
+
+The unified basis code in dbmm_emulator.F90 is retained but dormant
+(not called from user-facing code).
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+339a08e2e31dec6bdb2c635ab1dcf43a62c8b601
+2025-12-17 17:18:06 +0800
+Add unified basis multi-J emulator (experimental, poor accuracy)
+Implemented unified basis approach for multi-J DBMM emulator:
+- Zero-pad all snapshots to max dimension across all J values
+- Perform SVD on all padded snapshots together
+- Use RBF GP interpolation in (theta, J) parameter space
+
+New features:
+- emulator_init_unified, emulator_store_snapshot_unified
+- emulator_finalize_training_unified, emulator_predict_gp_unified
+- unified_basis config option in EMULATOR_TRAIN namelist
+- Updated save/load functions for unified basis mode
+
+Test results show ~100% error - approach needs rethinking.
+Zero-padding may not be suitable for varying channel counts.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+d9640fb47f90ffe2a817bb99ea61016dcf7ed1f1
+2025-12-17 16:44:07 +0800
+Add random J sampling option for multi-J emulator training
+New config options in EMULATOR_TRAIN namelist:
+- random_J: Enable random J sampling (default: .false.)
+- n_J_samples: Number of J values to sample per parameter set
+
+When random_J = .true., instead of computing all J values for each
+parameter sample, randomly selects n_J_samples distinct J values.
+This reduces training time by factor of nJ/n_J_samples.
+
+Example with jmax=20, n_samples=10:
+- Full scan:   21 J × 10 samples = 210 DBMM solves
+- Random (k=5): 5 J × 10 samples =  50 DBMM solves (4.2x speedup)
+
+Trade-off: Some J values may have fewer training samples, affecting
+prediction accuracy for those J values.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+2e054b40bf303bb672f899dd76ff55139af63b25
+2025-12-17 16:39:34 +0800
+Add multi-J emulator support for DBMM
+Implemented J as a parameter in the emulator framework:
+- Each J value (0 to jmax) has its own basis and reduced space
+- Per-J storage for variable channel dimensions (nch varies with J)
+- SVD-based reduced basis construction per J value
+- Updated save/load functions for multi-J emulators
+
+Key changes:
+- dbmm_emulator.F90: Added multi-J types (basis_array_t, eim_J_t),
+  emulator_init_multiJ, emulator_store_snapshot_J,
+  emulator_finalize_training_multiJ, emulator_predict_J
+- emulator_train.F90: Loop over all J values during training
+- emulator_io.F90: Added multi_J config option
+
+Training collects snapshots for all J values per parameter sample,
+resulting in n_samples × nJ total snapshots with per-J basis.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+05637a54bcf48c0b746e1847b54a5a151e59a2a1
+2025-12-17 16:03:16 +0800
+Add EIM (Empirical Interpolation Method) to DBMM Emulator
+Implements EIM for potential interpolation following the CC-RBM paper
+(arXiv:2512.08097). Key additions:
+
+EIM in dbmm_emulator.F90:
+- pot_snapshots, pot_basis: SVD-based potential basis functions
+- eim_indices: Greedy MaxVol selected interpolation points
+- V_red_basis: Precomputed reduced integrals X^H * V_basis * X
+- eim_finalize_training: SVD + greedy pivot selection
+- emulator_predict_eim: Fast prediction using precomputed integrals
+
+New pmm/ directory with standalone emulator programs:
+- emulator_train.F90: Training with LHS sampling, SVD/GS methods
+- emulator_predict.F90: Prediction comparing Matrix, EIM, RBF methods
+- emulator_io.F90: Configuration file parsing (namelist format)
+- param_mapping.F90: Potential parameter get/set interface
+
+Test results show EIM gives identical accuracy to Matrix projection,
+validating the implementation. EIM identifies only 3 interpolation
+points (of 28,880) needed to reconstruct the reduced potential matrix.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+60c36336960c121e8e4c927ea2de76dd139e303a
+2025-12-16 15:41:29 +0800
+Add DBMM Emulator module for reduced-basis CDCC calculations
+Core emulator module (dbmm_emulator.F90):
+- Latin Hypercube Sampling for parameter space exploration
+- PCA/SVD basis reduction using LAPACK ZGESVD
+- Training workflow: allocate, store snapshots, finalize
+- Online prediction with IDW interpolation
+- Solution reconstruction from reduced basis
+- Save/load functionality for trained emulators
+
+DBMM modifications:
+- Added optional c_out parameter to dbmm_coupled_channel_cc
+- Enables coefficient vector output for training data collection
+
+Test program (test_emulator.F90):
+- Validates emulator workflow with synthetic data
+- Tests SVD basis computation and save/load
+
+Build system:
+- Added dbmm_emulator.o to Makefile objects
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---
+e74b3b41a0ae99512dc800a13037db7160e791b8
+2025-12-16 15:27:38 +0800
+Add DBMM Emulator design document
+Comprehensive design for reduced-basis emulator for CDCC calculations:
+- Mathematical framework based on DBMM equation structure
+- Reduced Basis Method with PCA/SVD
+- Empirical Interpolation Method (EIM) for potentials
+- Implementation plan with code structure
+- Performance estimates and testing plan
+- Comparison with MSU CC-RBM approach
+
+Key advantage: DBMM single-incoming-channel formulation avoids
+O(N_c^4) scaling problem of standard CC-RBM methods.
+
+References: PLB 858 (2024) 139070, arXiv:2512.08097
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+
+---

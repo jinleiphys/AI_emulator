@@ -1,0 +1,25 @@
+ba9bc78 Rename cookie/pmm to cookie/emulator for clarity
+1059e37 Update PRC figures with panel labels (a)-(e) and legend placement
+1305caa Update PRC paper plotting script for color-online figures
+0495ff3 Change timing from CPU time to wall time for accurate speedup measurement
+34ac90c Further optimize W matrix construction with per-radial-point ZGEMM
+a06615f Optimize emulator_predict_J with ZGEMM/ZGEMV for 10x speedup
+3f5458d Remove RBF method, add BLAS optimization for matrix reconstruction
+ce94136 Disable fort.499 debug output to reduce disk usage
+611ca8a Add PRC paper figures and plotting script
+0f9d9be Rename GP to RBF: correct terminology for interpolation method
+560aece Remove duplicate 'Number of parameter sets' output
+02c0536 Add S-matrix file output for complete benchmark data
+a30b56d Add all 18 optical potential parameters to PARAM_SET namelist
+a3b6f0f Fix emulator training to use GPU solver (solver_type from input)
+12d88f8 Remove debug outputs and add PRC_paper test case
+581b0b2 Add wavefunction and cross section file output for plotting
+ef048e4 Add S-matrix and elastic cross section comparison to emulator_predict
+fb5c229 Add per-J GP interpolation and stdin input for emulator programs
+a6d28cd Remove unified basis approach (not viable for DBMM)
+339a08e Add unified basis multi-J emulator (experimental, poor accuracy)
+d9640fb Add random J sampling option for multi-J emulator training
+2e054b4 Add multi-J emulator support for DBMM
+05637a5 Add EIM (Empirical Interpolation Method) to DBMM Emulator
+60c3633 Add DBMM Emulator module for reduced-basis CDCC calculations
+e74b3b4 Add DBMM Emulator design document
