@@ -4,7 +4,7 @@ This repository contains the source code and development logs for a reduced-basi
 
 ## Overview
 
-This emulator was developed in **7 days** (December 16-19, 2025) using Claude Opus 4.5 via the Claude Code CLI, compared to an estimated 3-6 months for conventional development. The project demonstrates a reproducible workflow for AI-assisted computational physics research.
+This emulator was developed in **4 days** (December 16-19, 2025) using Claude Opus 4.5 via the Claude Code CLI, compared to an estimated 3-6 months for conventional development. The project demonstrates a reproducible workflow for AI-assisted computational physics research.
 
 ### Key Results
 - **220× speedup** over direct CDCC calculations
